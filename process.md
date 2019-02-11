@@ -54,3 +54,8 @@
 18. Feature tested and wrote unit test to reduce @balance by MIN_FARE when touch_out
   Result - error:     Failure/Error: expect { @oystercard.touch_out }.to change{@oystercard.balance}.by(- Oystercard::MIN_FARE)
        expected `@oystercard.balance` to have changed by -1, but was changed by 0
+
+19. Changed touch_out method to change balance by - MIN_FARE
+  Result - Passed
+
+20. 

@@ -18,11 +18,6 @@ class Oystercard
     @balance += value
   end
 
-  def deduct(value)
-    fail "You cannot deduct below zero" if @balance - value < MIN_BALANCE
-    @balance -= value
-  end
-
   def in_journey?
     @in_use
   end
@@ -33,8 +28,13 @@ class Oystercard
   end
 
   def touch_out
-    
+    deduct
     @in_use = false
   end
 
+private
+  def deduct(value = MIN_FARE)
+    fail "You cannot deduct below zero" if @balance - value < MIN_BALANCE
+    @balance -= value
+  end
 end
