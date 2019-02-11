@@ -1,9 +1,8 @@
 require "./lib/oystercard.rb"
 
-oystercard = Oystercard.new
+oystercard = Oystercard.new(0.5)
+oystercard.touch_in
 
-oystercard.deduct(20)
-oystercard.balance
-# expect error undefined method
+# expect error balance below minimum fare
 
 # expect to eq zero

@@ -31,7 +31,7 @@ describe Oystercard do
     expect(oystercard.balance).to eq(60)
   end
 
-  it "trows an error when asked to deduct below zero" do
+  it "throws an error when asked to deduct below zero" do
     message = "You cannot deduct below zero"
     expect { @oystercard.deduct(10) }.to raise_error(message)
   end
@@ -50,6 +50,11 @@ describe Oystercard do
   it "is NOT 'in_journey' if the card has touched out" do
       @oystercard.touch_out
       expect(@oystercard.in_journey?).to eq(false)
+  end
+
+  it "throws an error message when touch_in with balance below minimum fare" do
+    oystercard = Oystercard.new(0.5)
+    expect { oystercard.touch_in }.to raise_error("Balance below minimum fare")
   end
 
 end

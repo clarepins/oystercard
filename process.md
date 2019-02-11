@@ -41,3 +41,11 @@
 
 14. Did feature and unit tests for in_journey?, touch_in and touch_out
   Got errors for undefined methods
+
+15. Added instance variable in_journey
+  Result - Passed
+
+16. Feature tested touch_in with balance below minimum, expected error
+  Result - no error, need to unit test
+
+17. 
