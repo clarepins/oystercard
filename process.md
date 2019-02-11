@@ -15,4 +15,8 @@
 5. Feature tested top_up method
   Result - error: NoMethodError (undefined method `top_up')
 
-6. 
+6. Wrote top_up NoMethod
+  Result - passed tests
+
+7. Feature testsed and wrote rspec test for balance not exceeding £90.
+  Result - error: expect ... but nothing was raised
