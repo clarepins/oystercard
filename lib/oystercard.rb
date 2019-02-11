@@ -34,7 +34,7 @@ class Oystercard
 
 private
   def deduct(value = MIN_FARE)
-    fail "You cannot deduct below zero" if @balance - value < MIN_BALANCE
+    # fail "You cannot deduct below zero" if @balance - value < MIN_BALANCE
     @balance -= value
   end
 end
