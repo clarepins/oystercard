@@ -5,8 +5,8 @@ describe Oystercard do
     @oystercard = Oystercard.new
   end
 
-  it "has a balance of £0 by default" do
-    expect(@oystercard.balance).to eq(0)
+  it "has a balance of £DEFAULT_BALANCE by default" do
+    expect(@oystercard.balance).to eq(Oystercard::DEFAULT_BALANCE)
   end
 
   it "has a balance of 10 when topped up with £10" do
@@ -43,8 +43,9 @@ describe Oystercard do
   it { is_expected.to respond_to(:touch_out)}
 
   it "is 'in_journey' if the card has touched in but not touched out" do
-    @oystercard.touch_in
-    expect(@oystercard.in_journey?).to eq(true)
+    oystercard = Oystercard.new(10)
+    oystercard.touch_in
+    expect(oystercard.in_journey?).to eq(true)
   end
 
   it "is NOT 'in_journey' if the card has touched out" do
@@ -55,6 +56,10 @@ describe Oystercard do
   it "throws an error message when touch_in with balance below minimum fare" do
     oystercard = Oystercard.new(0.5)
     expect { oystercard.touch_in }.to raise_error("Balance below minimum fare")
+  end
+
+  it "balance changes by " do
+    expect { @oystercard.touch_out }.to change{@oystercard.balance}.by(- Oystercard::MIN_FARE)
   end
 
 end

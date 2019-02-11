@@ -4,8 +4,12 @@ class Oystercard
   attr_reader :in_use
 
   BALANCE_LIMIT = 90
+  MIN_FARE = 1
+  DEFAULT_BALANCE = 0
+  MIN_BALANCE = 0
 
-  def initialize(balance = 0)
+
+  def initialize(balance = DEFAULT_BALANCE)
     @balance = balance
   end
 
@@ -15,7 +19,7 @@ class Oystercard
   end
 
   def deduct(value)
-    fail "You cannot deduct below zero" if @balance - value < 0
+    fail "You cannot deduct below zero" if @balance - value < MIN_BALANCE
     @balance -= value
   end
 
@@ -24,10 +28,12 @@ class Oystercard
   end
 
   def touch_in
+    raise "Balance below minimum fare" if @balance < MIN_FARE
     @in_use = true
   end
 
   def touch_out
+    
     @in_use = false
   end
 
