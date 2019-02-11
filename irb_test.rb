@@ -2,7 +2,8 @@ require "./lib/oystercard.rb"
 
 oystercard = Oystercard.new
 
-oystercard.top_up(100)
-# expect error above max value
+oystercard.deduct(20)
+oystercard.balance
+# expect error undefined method
 
 # expect to eq zero

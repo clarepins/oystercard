@@ -20,3 +20,17 @@
 
 7. Feature testsed and wrote rspec test for balance not exceeding £90.
   Result - error: expect ... but nothing was raised
+
+8. Added a guard loop to top_up to prevent balance exceeding the maximum
+  Result - passed tests
+
+9. Unit tested initializing with 70 and topping up 30
+  Result - ArgumentError: wrong number of arguments (given 1, expected 0)
+
+10. Gave initialize method argument balance = 0
+  Result - passed tests
+
+11. Feature tested deduct method
+  Result - NoMethodError (undefined method 'deduct')
+
+12.
