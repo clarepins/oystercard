@@ -34,7 +34,7 @@
   Result - NoMethodError (undefined method 'deduct')
 
 12. Unit test for deduct method
-  Result - error: undefined method `deduct''
+  Result - error: undefined method 'deduct'
 
 13. Coded deduct NoMethod
   Result - Passed
