@@ -31,4 +31,25 @@ describe Oystercard do
     expect(oystercard.balance).to eq(60)
   end
 
+  it "trows an error when asked to deduct below zero" do
+    message = "You cannot deduct below zero"
+    expect { @oystercard.deduct(10) }.to raise_error(message)
+  end
+
+  it { is_expected.to respond_to(:in_journey?)}
+
+  it { is_expected.to respond_to(:touch_in)}
+
+  it { is_expected.to respond_to(:touch_out)}
+
+  it "is 'in_journey' if the card has touched in but not touched out" do
+    @oystercard.touch_in
+    expect(@oystercard.in_journey?).to eq(true)
+  end
+
+  it "is NOT 'in_journey' if the card has touched out" do
+      @oystercard.touch_out
+      expect(@oystercard.in_journey?).to eq(false)
+  end
+
 end

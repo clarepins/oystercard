@@ -33,4 +33,11 @@
 11. Feature tested deduct method
   Result - NoMethodError (undefined method 'deduct')
 
-12.
+12. Unit test for deduct method
+  Result - error: undefined method `deduct''
+
+13. Coded deduct NoMethod
+  Result - Passed
+
+14. Did feature and unit tests for in_journey?, touch_in and touch_out
+  Got errors for undefined methods
