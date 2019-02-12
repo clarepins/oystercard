@@ -3,6 +3,7 @@ require "./lib/oystercard"
 describe Oystercard do
   before(:each) do
     @oystercard = Oystercard.new
+    @oystercard_5 = Oystercard.new(5)
   end
 
   let(:station) { double :station }
@@ -29,7 +30,7 @@ describe Oystercard do
 
   it "deducts value from the card when touch_out method is passed" do
     oystercard = Oystercard.new(70)
-    oystercard.touch_out
+    oystercard.touch_out(station)
     expect(oystercard.balance).to eq(70 - Oystercard::MIN_FARE)
   end
 
@@ -51,7 +52,7 @@ describe Oystercard do
   end
 
   it "is NOT 'in_journey' if the card has touched out" do
-      @oystercard.touch_out
+      @oystercard.touch_out(station)
       expect(@oystercard.in_journey?).to eq(nil)
   end
 
@@ -61,13 +62,31 @@ describe Oystercard do
   end
 
   it "balance changes by " do
-    expect { @oystercard.touch_out }.to change{@oystercard.balance}.by(- Oystercard::MIN_FARE)
+    expect { @oystercard.touch_out(station) }.to change{@oystercard.balance}.by(- Oystercard::MIN_FARE)
   end
 
-  it "saves travelled from station" do
-    oystercard = Oystercard.new(5)
-    oystercard.touch_in(station)
-    expect(oystercard.entry_station).to eq(station)
+  it "saves entry station" do
+    @oystercard_5.touch_in(station)
+    expect(@oystercard_5.entry_station).to eq(station)
+  end
+
+  it "saves exit station" do
+    @oystercard_5.touch_out(station)
+    expect(@oystercard_5.exit_station).to eq(station)
+  end
+
+  it "has an empty list of journeys when card is created" do
+    expect(@oystercard.journey_history).to eq([])
+  end
+
+  it "saves journey_history" do
+    @oystercard_5.touch_in("station A")
+    @oystercard_5.touch_out("station B")
+    @oystercard_5.touch_in("station C")
+    @oystercard_5.touch_out("station D")
+    journey_history = [{entry_station: "station A", exit_station: "station B"},
+      {entry_station: "station C", exit_station: "station D"}]
+    expect(@oystercard_5.journey_history).to eq(journey_history)
   end
 
 end
