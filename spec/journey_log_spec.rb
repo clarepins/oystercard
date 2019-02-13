@@ -20,4 +20,5 @@ describe JourneyLog do
     @log.finish(station)
     expect(@log.journeys).to eq([{entry: station, exit: station}])
   end
+  
 end
