@@ -27,12 +27,18 @@ describe Journey do
     expect(Journey::MIN_FARE).to eq 1
   end
 
-  it "Applies penalty fare if there is not exit station" do
+  it "Applies penalty fare if there is no exit station" do
     @journey.finish
     expect(@journey.fare).to eq Journey::PENALTY_FARE
   end
 
   it "Has a penalty fare constant that equals 6" do
-    expect(Journey::PENALTY_FARE).to eq 6 
+    expect(Journey::PENALTY_FARE).to eq 6
+  end
+
+  it "Applies penalty fare if there is no entry station" do
+    journey = Journey.new
+    journey.finish("Aldgate")
+    expect(journey.fare).to eq Journey::PENALTY_FARE
   end
 end

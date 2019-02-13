@@ -1,8 +1,8 @@
 class Oystercard
 
   attr_reader :balance
-  attr_reader :entry_station
-  attr_reader :exit_station
+  # attr_reader :entry_station
+  # attr_reader :exit_station
   attr_reader :journey_history
 
   BALANCE_LIMIT = 90
@@ -26,25 +26,23 @@ class Oystercard
 
   def touch_in(station)
     raise "Balance below minimum fare" if @balance < MIN_FARE
-    @entry_station = station
-    @exit_station = nil
+    @journey = Journey.new(station)
+    # @entry_station = station
+    # @exit_station = nil
   end
 
   def touch_out(station)
+    @journey_history << @journey.finish(station)
     deduct
-    @exit_station = station
-    save_journey_history
-    @entry_station = nil
   end
 
-  def save_journey_history
-    @journey_history << {entry_station: @entry_station, exit_station: @exit_station}
-  end
+  # def save_journey_history
+  #    << {entry_station: @entry_station, exit_station: @exit_station}
+  # end
 
 private
-  def deduct(value = MIN_FARE)
-    # fail "You cannot deduct below zero" if @balance - value < MIN_BALANCE
-    @balance -= value
+  def deduct
+    @balance -= @journey.fare
   end
 
 end
