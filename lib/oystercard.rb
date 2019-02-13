@@ -22,14 +22,15 @@ class Oystercard
     @journey_history.start(station)
   end
 
-  def touch_out(station = nil)
+  def touch_out(station)
+    @journey = Journey.new if @journey.nil?
     @journey_history.finish(station)
     deduct
   end
 
 private
   def deduct
-    @balance -= @journey_history.journey.fare
+    @balance -= @journey.fare
   end
 
 end

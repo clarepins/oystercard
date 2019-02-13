@@ -6,7 +6,7 @@ describe Journey do
   let(:other_station) {double :other_station}
 
   before :each do
-    @journey = Journey.new("Elephant")
+    @journey = Journey.new(station)
   end
 
   it "is 'in journey' when a journey has begun but not finished" do
@@ -14,17 +14,12 @@ describe Journey do
   end
 
   it "is not longer in journey once journey is finsihed" do
-    @journey.finish("Aldgate")
+    @journey.finish(other_station)
     expect(@journey.in_journey?).to eq(false)
   end
 
   it "Returns the entry and exit station in a hash" do
-    expect(@journey.finish("Aldgate")).to eq({entry: "Elephant", exit: "Aldgate"})
-  end
-
-  it "returns the fare when the journey is finished" do
-    @journey.finish("Aldgate")
-    expect(@journey.fare).to eq(Journey::MIN_FARE)
+    expect(@journey.finish(other_station)).to eq({entry: station, exit: other_station})
   end
 
   it "Has a constant for minimum fare that equals 1" do
@@ -42,12 +37,12 @@ describe Journey do
 
   it "Applies penalty fare if there is no entry station" do
     journey = Journey.new
-    journey.finish("Aldgate")
+    journey.finish(other_station)
     expect(journey.fare).to eq Journey::PENALTY_FARE
   end
 
   it "Saves the entry station during the journey" do
-    expect(@journey.entry).to eq "Elephant"
+    expect(@journey.entry).to eq station
   end
 
   it "Has a fare of one when travelling from zone 1 to zone 1" do
@@ -59,8 +54,9 @@ describe Journey do
     update_zone(2,4)
     expect(@journey.fare).to eq 3
   end
-  
+
   def update_zone(entry_zone, exit_zone)
+    @journey.finish(other_station)
     allow(station).to receive(:zone).and_return(entry_zone)
     allow(other_station).to receive(:zone).and_return(exit_zone)
   end

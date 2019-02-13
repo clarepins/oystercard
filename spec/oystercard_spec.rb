@@ -3,10 +3,13 @@ require "./lib/oystercard"
 describe Oystercard do
   before(:each) do
     @oystercard = Oystercard.new
-    @oystercard_5 = Oystercard.new(5)
+    @oystercard_20 = Oystercard.new(20)
   end
 
   let(:station) { double :station }
+  let(:station_2) { double :station_2 }
+  let(:station_3) { double :station_3 }
+  let(:station_4) { double :station_4 }
 
   it "has a balance of £DEFAULT_BALANCE by default" do
     expect(@oystercard.balance).to eq(Oystercard::DEFAULT_BALANCE)
@@ -44,13 +47,17 @@ describe Oystercard do
   end
 
   it "saves journey_history" do
-    @oystercard_5.touch_in("station A")
-    @oystercard_5.touch_out("station B")
-    @oystercard_5.touch_in("station C")
-    @oystercard_5.touch_out("station D")
-    journey_history = [{entry: "station A", exit: "station B"},
-      {entry: "station C", exit: "station D"}]
-    expect(@oystercard_5.journey_history.journeys).to eq(journey_history)
+    allow(station).to receive(:zone).and_return(1)
+    allow(station_2).to receive(:zone).and_return(1)
+    allow(station_3).to receive(:zone).and_return(1)
+    allow(station_4).to receive(:zone).and_return(1)
+    @oystercard_20.touch_in(station)
+    @oystercard_20.touch_out(station_2)
+    @oystercard_20.touch_in(station_3)
+    @oystercard_20.touch_out(station_4)
+    journey_history = [{entry: station, exit: station_2},
+      {entry: station_3, exit: station_4}]
+    expect(@oystercard_20.journey_history.journeys).to eq(journey_history)
   end
 
 end

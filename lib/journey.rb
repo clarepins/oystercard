@@ -3,6 +3,7 @@ class Journey
 
   MIN_FARE = 1
   PENALTY_FARE = 6
+  ZONE_FARE = 1
 
   def initialize(entry = nil, exit = nil)
     @entry = entry
@@ -22,7 +23,7 @@ class Journey
   end
 
   def fare
-    @exit && @entry ? MIN_FARE : PENALTY_FARE
+    @exit && @entry ? MIN_FARE + (@entry.zone - @exit.zone).abs * ZONE_FARE : PENALTY_FARE
   end
 
 end

@@ -17,8 +17,3 @@ card_2.touch_in
 card_2.touch_out(aldgate)
 
 log = JourneyLog.new
-log.start(elephant)
-log.current_journey
-log.finish(aldgate)
-log.current_journey
-log.journeys
