@@ -20,7 +20,19 @@ describe Journey do
 
   it "returns the fare when the journey is finished" do
     @journey.finish("Aldgate")
-    expect(@journey.fare).to eq(Oystercard::MIN_FARE)
+    expect(@journey.fare).to eq(Journey::MIN_FARE)
   end
 
+  it "Has a constant for minimum fare that equals 1" do
+    expect(Journey::MIN_FARE).to eq 1
+  end
+
+  it "Applies penalty fare if there is not exit station" do
+    @journey.finish
+    expect(@journey.fare).to eq Journey::PENALTY_FARE
+  end
+
+  it "Has a penalty fare constant that equals 6" do
+    expect(Journey.PENALTY_FARE).to eq 6 
+  end
 end
