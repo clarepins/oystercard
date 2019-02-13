@@ -1,18 +1,24 @@
 require "./lib/oystercard.rb"
 require "./lib/journey.rb"
+require "./lib/station.rb"
+require "./lib/journey_log.rb"
 
-# oystercard = Oystercard.new(5)
-# oystercard.touch_in("elephant")
-# oystercard.touch_out("aldgate")
-# oystercard.journey_history
-#
-# require "./lib/station.rb"
-# Station.new("station", :zone)
+card = Oystercard.new
+card.top_up(20)
+elephant = Station.new("Elephant", :zone_2)
+aldgate = Station.new("Aldgate", :zone_1)
+card.touch_in(elephant)
+card.touch_out(aldgate)
+card.balance
 
-journey = Journey.new("Elephant")
+card_2 = Oystercard.new
+card_2.top_up(20)
+card_2.touch_in
+card_2.touch_out(aldgate)
 
-journey.in_journey?
-
-journey.finish("Aldgate")
-
-journey.fare
+log = JourneyLog.new
+log.start(elephant)
+log.current_journey
+log.finish(aldgate)
+log.current_journey
+log.journeys

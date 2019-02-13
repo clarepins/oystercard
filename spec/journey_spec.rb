@@ -45,4 +45,5 @@ describe Journey do
   it "Saves the entry station during the journey" do
     expect(@journey.entry).to eq "Elephant"
   end 
+
 end

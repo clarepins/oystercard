@@ -17,7 +17,7 @@ class Oystercard
     @balance += value
   end
 
-  def touch_in(station)
+  def touch_in(station = nil)
     raise "Balance below minimum fare" if @balance < MIN_FARE
     @journey = Journey.new(station)
   end
