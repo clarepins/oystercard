@@ -33,6 +33,6 @@ describe Journey do
   end
 
   it "Has a penalty fare constant that equals 6" do
-    expect(Journey.PENALTY_FARE).to eq 6 
+    expect(Journey::PENALTY_FARE).to eq 6 
   end
 end
