@@ -1,6 +1,10 @@
 require "./lib/journey.rb"
 
 describe Journey do
+
+  let(:station) {double :station}
+  let(:other_station) {double :other_station}
+
   before :each do
     @journey = Journey.new("Elephant")
   end
@@ -44,6 +48,20 @@ describe Journey do
 
   it "Saves the entry station during the journey" do
     expect(@journey.entry).to eq "Elephant"
-  end 
+  end
 
+  it "Has a fare of one when travelling from zone 1 to zone 1" do
+    update_zone(1,1)
+    expect(@journey.fare).to eq 1
+  end
+
+  it "Has a fare of 3 when travelling from zone 2 to zone 4" do
+    update_zone(2,4)
+    expect(@journey.fare).to eq 3
+  end
+  
+  def update_zone(entry_zone, exit_zone)
+    allow(station).to receive(:zone).and_return(entry_zone)
+    allow(other_station).to receive(:zone).and_return(exit_zone)
+  end
 end

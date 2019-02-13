@@ -40,7 +40,7 @@ describe Oystercard do
   end
 
   it "has an empty list of journeys when card is created" do
-    expect(@oystercard.journey_history).to eq([])
+    expect(@oystercard.journey_history.journeys).to eq([])
   end
 
   it "saves journey_history" do
@@ -50,7 +50,7 @@ describe Oystercard do
     @oystercard_5.touch_out("station D")
     journey_history = [{entry: "station A", exit: "station B"},
       {entry: "station C", exit: "station D"}]
-    expect(@oystercard_5.journey_history).to eq(journey_history)
+    expect(@oystercard_5.journey_history.journeys).to eq(journey_history)
   end
 
 end

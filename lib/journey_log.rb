@@ -1,17 +1,18 @@
 class JourneyLog
-
+  attr_reader :journey
   def initialize
     @journeys = []
   end
 
   def start(station)
+    @journey = nil
     @start = station
     current_journey
   end
 
   def finish(station)
     current_journey
-    @journeys << @current_journey.finish(station)
+    @journeys << @journey.finish(station)
   end
 
   def journeys
@@ -20,7 +21,7 @@ class JourneyLog
 
 private
   def current_journey
-    @current_journey ||= Journey.new(@start)
+    @journey ||= Journey.new(@start)
   end
 
 end
