@@ -14,6 +14,8 @@ describe Journey do
     expect(@journey.in_journey?).to eq(false)
   end
 
-  
+  it "Returns the entry and exit station in a hash" do
+    expect(@journey.finish("Aldgate")).to eq({entry: "Elephant", exit: "Aldgate"})
+  end
 
 end

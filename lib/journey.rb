@@ -8,9 +8,12 @@ class Journey
   end
 
   def in_journey?
-    true if @entry_station
+    return true if @entry_station
+    false
   end
 
-
+  def finish(station)
+    @entry_station = nil
+  end
 
 end
