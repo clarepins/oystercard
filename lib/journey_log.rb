@@ -7,4 +7,6 @@ class JourneyLog
   def start(station)
   end
 
+  def finish(station)
+  end 
 end

@@ -15,4 +15,9 @@ describe JourneyLog do
     @log.finish(station)
   end
 
+  it "returns a list of all journeys completed" do
+    @log.start(station)
+    @log.finish(station)
+    expect(@log.journeys).to eq([{entry: station, exit: station}])
+  end
 end
