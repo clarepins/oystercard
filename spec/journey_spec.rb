@@ -41,4 +41,8 @@ describe Journey do
     journey.finish("Aldgate")
     expect(journey.fare).to eq Journey::PENALTY_FARE
   end
+
+  it "Saves the entry station during the journey" do
+    expect(@journey.entry).to eq "Elephant"
+  end 
 end

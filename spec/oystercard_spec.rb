@@ -31,7 +31,7 @@ describe Oystercard do
   it "deducts value from the card when touch_out method is passed" do
     oystercard = Oystercard.new(70)
     oystercard.touch_out(station)
-    expect(oystercard.balance).to eq(70 - Oystercard::MIN_FARE)
+    expect(oystercard.balance).to eq(70 - Journey::PENALTY_FARE)
   end
 
   it { is_expected.to respond_to(:in_journey?)}
@@ -40,11 +40,6 @@ describe Oystercard do
 
   it { is_expected.to respond_to(:touch_out)}
 
-  it "is 'in_journey' if the card has touched in but not touched out" do
-    oystercard = Oystercard.new(10)
-    oystercard.touch_in(station)
-    expect(oystercard.in_journey?).to eq(true)
-  end
 
   it "is NOT 'in_journey' if the card has touched out" do
       @oystercard.touch_out(station)
@@ -54,15 +49,6 @@ describe Oystercard do
   it "throws an error message when touch_in with balance below minimum fare" do
     oystercard = Oystercard.new(0.5)
     expect { oystercard.touch_in(station) }.to raise_error("Balance below minimum fare")
-  end
-
-  it "balance changes by " do
-    expect { @oystercard.touch_out(station) }.to change{@oystercard.balance}.by(- Oystercard::MIN_FARE)
-  end
-
-  it "saves entry station" do
-    @oystercard_5.touch_in(station)
-    expect(@oystercard_5.entry_station).to eq(station)
   end
 
   it "saves exit station" do

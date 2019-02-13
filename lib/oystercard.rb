@@ -20,10 +20,6 @@ class Oystercard
     @balance += value
   end
 
-  def in_journey?
-    true if @entry_station
-  end
-
   def touch_in(station)
     raise "Balance below minimum fare" if @balance < MIN_FARE
     @journey = Journey.new(station)
@@ -32,6 +28,7 @@ class Oystercard
   end
 
   def touch_out(station)
+    @journey = Journey.new if @journey.nil?
     @journey_history << @journey.finish(station)
     deduct
   end
