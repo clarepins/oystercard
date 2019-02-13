@@ -34,26 +34,9 @@ describe Oystercard do
     expect(oystercard.balance).to eq(70 - Journey::PENALTY_FARE)
   end
 
-  it { is_expected.to respond_to(:in_journey?)}
-
-  it { is_expected.to respond_to(:touch_in)}
-
-  it { is_expected.to respond_to(:touch_out)}
-
-
-  it "is NOT 'in_journey' if the card has touched out" do
-      @oystercard.touch_out(station)
-      expect(@oystercard.in_journey?).to eq(nil)
-  end
-
   it "throws an error message when touch_in with balance below minimum fare" do
     oystercard = Oystercard.new(0.5)
     expect { oystercard.touch_in(station) }.to raise_error("Balance below minimum fare")
-  end
-
-  it "saves exit station" do
-    @oystercard_5.touch_out(station)
-    expect(@oystercard_5.exit_station).to eq(station)
   end
 
   it "has an empty list of journeys when card is created" do
@@ -65,8 +48,8 @@ describe Oystercard do
     @oystercard_5.touch_out("station B")
     @oystercard_5.touch_in("station C")
     @oystercard_5.touch_out("station D")
-    journey_history = [{entry_station: "station A", exit_station: "station B"},
-      {entry_station: "station C", exit_station: "station D"}]
+    journey_history = [{entry: "station A", exit: "station B"},
+      {entry: "station C", exit: "station D"}]
     expect(@oystercard_5.journey_history).to eq(journey_history)
   end
 
