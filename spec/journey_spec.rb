@@ -18,4 +18,9 @@ describe Journey do
     expect(@journey.finish("Aldgate")).to eq({entry: "Elephant", exit: "Aldgate"})
   end
 
+  it "returns the fare when the journey is finished" do
+    @journey.finish("Aldgate")
+    expect(@journey.fare).to eq(Oystercard::MIN_FARE)
+  end
+
 end
