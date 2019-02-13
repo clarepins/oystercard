@@ -7,4 +7,10 @@ class Journey
     @exit_station = exit_station
   end
 
+  def in_journey?
+    true if @entry_station
+  end
+
+
+
 end

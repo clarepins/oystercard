@@ -10,14 +10,13 @@ class Oystercard
   DEFAULT_BALANCE = 0
   MIN_BALANCE = 0
 
-
   def initialize(balance = DEFAULT_BALANCE)
     @balance = balance
     @journey_history = []
   end
 
   def top_up(value)
-    fail "You cannot top up above max limit of £90" if @balance + value > BALANCE_LIMIT
+    fail "You cannot top up above max limit of £#{BALANCE_LIMIT}" if @balance + value > BALANCE_LIMIT
     @balance += value
   end
 
