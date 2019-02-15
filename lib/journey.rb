@@ -15,8 +15,8 @@ class Journey
     @in_journey
   end
 
-  def finish(station = nil)
-    @exit = station
+  def finish(exit = nil)
+    @exit = exit
     @in_journey = false
     journey = {entry: @entry, exit: @exit}
     journey
